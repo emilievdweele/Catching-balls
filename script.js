@@ -32,3 +32,9 @@ function draw() {
   background(225);
   ball1.drawBall();
 }
+
+function keyPressed() {
+  if(keyCode == 32){
+    ball1.y -= 50;
+  }
+}
