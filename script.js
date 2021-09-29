@@ -29,26 +29,41 @@ class Balken {
   }
 
   drawBalken() {
-    rect(this.x, this.y, this.w, this.h)
-    this.x -= 5
+    rect(this.x, this.y, this.w, this.h);
+    this.x -= 5;
   }
 }
 
 var ball1;
+var gatGrootte;
+
+var balk1;
+var balk2;
 
 function setup() {
   createCanvas(800, 400);
 
   ball1 = new Ball(150, 200, 30, 30, 2)
+
+  gatGrootte = 100;
 }
 
 function draw() {
   background(225);
   ball1.drawBall();
 
-if(frameCount % 100 == 0){
-  rect = new Balken(random)
-}
+  if(frameCount % 100 == 0){
+
+    var gatHoogte = random(0, 400 - gatGrootte);
+
+    balk1 = new Balken(800, 0, 50, gatHoogte);
+    balk2 = new Balken(800, gatHoogte + gatGrootte, 50, 400);
+  }
+
+  if (balk1 != null) {
+    balk1.drawBalken();
+    balk2.drawBalken();
+  }
 
 }
 
