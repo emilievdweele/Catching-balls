@@ -1,21 +1,27 @@
 class Ball {
-  constructor(x, y, w, h, gravity) {
+  constructor(x, y, w, h, vy, ay) {
   this.x = x;
   this.y = y;
   this.w = w;
   this.h = h;
-  this.gravity = gravity;
+  this.vy = vy;
+  this.ay = 0.3;
   }
 
   drawBall() {
     ellipse(this.x, this.y, this.w, this.h)
-    this.y = this.y + this.gravity;
+    this.vy = this.vy + this.ay;
+    this.y = this.y + this.vy;
   
-    if(this.y > 380) {
-      this.gravity = 0;
+    if(this.y > 385) {
+      this.vy = 0;
+      this.ay = 0;
+    }
+    else {
+      this.ay = 0.3;
     }
     if(this.y < 0) {
-      this.y = 20;
+      this.y = 0;
     }
   }
 }
@@ -69,6 +75,6 @@ function draw() {
 
 function keyPressed() {
   if(keyCode == 32){
-    ball1.y -= 60;
+    ball1.vy = -5;
   }
 }
