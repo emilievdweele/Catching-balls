@@ -38,13 +38,16 @@ class Balken {
     rect(this.x, this.y, this.w, this.h);
     this.x -= 5;
   }
+
+  isColliding(){
+    if(ball1.x > this.x){
+      console.log("Bots");
+    }
+  }
 }
 
 var ball1;
 var gatGrootte;
-
-var balk1;
-var balk2;
 
 function setup() {
   createCanvas(800, 400);
@@ -54,6 +57,8 @@ function setup() {
   gatGrootte = 100;
 }
 
+var balken = [];
+
 function draw() {
   background(225);
   ball1.drawBall();
@@ -62,14 +67,24 @@ function draw() {
 
     var gatHoogte = random(0, 400 - gatGrootte);
 
-    balk1 = new Balken(800, 0, 50, gatHoogte);
-    balk2 = new Balken(800, gatHoogte + gatGrootte, 50, 400);
+    let balk1 = new Balken(800, 0, 50, gatHoogte);
+    let balk2 = new Balken(800, gatHoogte + gatGrootte, 50, 400);
+
+    balken.push(balk1);
+    balken.push(balk2);
+
+    if(balken.length > 6){
+      balken.splice(0,2);
+    }
   }
 
-  if (balk1 != null) {
-    balk1.drawBalken();
-    balk2.drawBalken();
-  }
+  
+  balken.forEach((b) => {
+    b.drawBalken();
+    b.isColliding();
+
+  });
+
 
 }
 
