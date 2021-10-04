@@ -1,49 +1,56 @@
 class Ball {
   constructor(x, y, w, h, vy, ay) {
-  this.x = x;
-  this.y = y;
-  this.w = w;
-  this.h = h;
-  this.vy = vy;
-  this.ay = 0.3;
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+    this.vy = vy;
+    this.ay = 0.3;
   }
 
   drawBall() {
+    fill("white");
     ellipse(this.x, this.y, this.w, this.h)
     this.vy = this.vy + this.ay;
     this.y = this.y + this.vy;
-  
-    if(this.y > 385) {
+
+    if (this.y > 385) {
       this.vy = 0;
       this.ay = 0;
     }
     else {
       this.ay = 0.3;
     }
-    if(this.y < 0) {
+    if (this.y < 0) {
       this.y = 0;
     }
   }
 }
 
-class Balken {
-  constructor(x, y, w, h) {
+class Balk {
+  constructor(x, y, w, h, color) {
     this.x = x;
     this.y = y;
     this.w = w;
     this.h = h;
+    this.c = "green";
   }
 
-  drawBalken() {
+  drawBalk() {
+    fill(this.c);
     rect(this.x, this.y, this.w, this.h);
     this.x -= 5;
   }
 
-  isColliding(){
-    if(ball1.x > this.x){
-      console.log("Bots");
+  isColliding() {
+    if (ball1.x > this.x && ball1.x < this.x + this.w) {
+      this.c = "red";
+    }
+    else{
+      this.c = "green";
     }
   }
+
 }
 
 var ball1;
@@ -57,39 +64,41 @@ function setup() {
   gatGrootte = 100;
 }
 
-var balken = [];
+var balk = [];
 
 function draw() {
   background(225);
   ball1.drawBall();
 
-  if(frameCount % 100 == 0){
+  if (frameCount % 100 == 0) {
 
     var gatHoogte = random(0, 400 - gatGrootte);
 
-    let balk1 = new Balken(800, 0, 50, gatHoogte);
-    let balk2 = new Balken(800, gatHoogte + gatGrootte, 50, 400);
+    let balk1 = new Balk(800, 0, 50, gatHoogte);
+    let balk2 = new Balk(800, gatHoogte + gatGrootte, 50, 400);
 
-    balken.push(balk1);
-    balken.push(balk2);
+    balk.push(balk1);
+    balk.push(balk2);
 
-    if(balken.length > 6){
-      balken.splice(0,2);
+    if (balk.length > 6) {
+      balk.splice(0, 2);
     }
   }
 
-  
-  balken.forEach((b) => {
-    b.drawBalken();
+
+  balk.forEach((b) => {
+    b.drawBalk();
     b.isColliding();
-
   });
-
 
 }
 
 function keyPressed() {
-  if(keyCode == 32){
+  if (keyCode == 32) {
     ball1.vy = -5;
   }
+}
+
+function isColliding() {
+  colliding = false;
 }
