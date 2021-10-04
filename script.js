@@ -1,3 +1,8 @@
+var ball1;
+var gatGrootte;
+var scoreboard = 0;
+
+
 class Ball {
   constructor(x, y, w, h, vy, ay) {
     this.x = x;
@@ -56,9 +61,6 @@ class Balk {
 
 }
 
-var ball1;
-var gatGrootte;
-
 function setup() {
   createCanvas(800, 400);
 
@@ -72,8 +74,11 @@ var balk = [];
 function draw() {
   background(225);
   ball1.drawBall();
+  fill("white");
+  text(scoreboard, 300, 50);
 
-  if (frameCount % 100 == 0) {
+
+  if (frameCount % 80 == 0) {
 
     var gatHoogte = random(0, 400 - gatGrootte);
 
@@ -93,7 +98,9 @@ function draw() {
     b.drawBalk();
     b.isColliding();
   });
-
+  if (frameCount % 90 == 0){
+    scoreboard = scoreboard + 1
+  }
 }
 
 function keyPressed() {
