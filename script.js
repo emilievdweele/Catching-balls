@@ -43,7 +43,10 @@ class Balk {
   }
 
   isColliding() {
-    if (ball1.x > this.x && ball1.x < this.x + this.w) {
+    if (ball1.x < this.x + this.w &&
+        ball1.x + ball1.w > this.x &&
+        ball1.y < this.y + this.h &&
+        ball1.y + ball1.h > this.y) {
       this.c = "red";
     }
     else{
