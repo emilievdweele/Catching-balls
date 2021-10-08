@@ -1,6 +1,7 @@
 var ball1;
 var gatGrootte;
 var scoreboard = 0;
+var gameState = 0;
 
 
 class Ball {
@@ -49,12 +50,13 @@ class Balk {
 
   isColliding() {
     if (ball1.x < this.x + this.w &&
-        ball1.x + ball1.w > this.x &&
-        ball1.y < this.y + this.h &&
-        ball1.y + ball1.h > this.y) {
+      ball1.x + ball1.w > this.x &&
+      ball1.y < this.y + this.h &&
+      ball1.y + ball1.h > this.y) {
       this.c = "red";
+      gameState = 2;
     }
-    else{
+    else {
       this.c = "green";
     }
   }
@@ -72,8 +74,38 @@ function setup() {
 var balk = [];
 
 function draw() {
+
+  text("gameState" + gameState, 30, 30);
+
+  if (gameState == 0) {
+    background("yellow");
+    menu();
+  }
+
+  if (gameState == 1) {
+    background("blue");
+    text("Start game", 30, 40)
+    game();
+  }
+
+  if (gameState == 2) {
+    background("red");    
+    text("GAME OVER", 50, 40);
+    ball1 = new Ball(150, 200, 30, 30, 2)
+    balk = [];
+    x = 0;
+  }
+}
+
+
+// if (frameCount % 90 == 0) {
+//   scoreboard = scoreboard + 1
+// }
+// }
+
+function game() {
   background(225);
-  ball1.drawBall();
+
   fill("white");
   text(scoreboard, 300, 50);
 
@@ -93,22 +125,42 @@ function draw() {
     }
   }
 
-
+  ball1.drawBall();
   balk.forEach((b) => {
     b.drawBalk();
     b.isColliding();
   });
-  if (frameCount % 90 == 0){
-    scoreboard = scoreboard + 1
-  }
 }
 
 function keyPressed() {
   if (keyCode == 32) {
     ball1.vy = -5;
   }
+
+  if (keyCode == 49) {
+    gameState = 1;
+  }
+
+  if (keyCode == 50) {
+    gameState = 2;
+  }
+
+  if (keyCode == 51) {
+    gameState = 0;
+  }
 }
 
 function isColliding() {
   colliding = false;
+}
+
+var x = 0;
+
+function menu() {
+  background("white");
+  text("Menu", 30, 40);
+  text("1. Start", 25, 65);
+  text("2. Game over", 25, 85);
+  text("3. Terug naar menu", 25, 105);
+  fill("black");
 }
