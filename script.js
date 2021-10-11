@@ -2,6 +2,9 @@ var ball1;
 var gatGrootte;
 var scoreboard = 0;
 var gameState = 0;
+var balk = [];
+var x = 0;
+
 
 
 class Ball {
@@ -71,8 +74,6 @@ function setup() {
   gatGrootte = 100;
 }
 
-var balk = [];
-
 function draw() {
 
   text("gameState" + gameState, 30, 30);
@@ -97,11 +98,6 @@ function draw() {
   }
 }
 
-
-// if (frameCount % 90 == 0) {
-//   scoreboard = scoreboard + 1
-// }
-// }
 
 function game() {
   background(225);
@@ -129,6 +125,11 @@ function game() {
   balk.forEach((b) => {
     b.drawBalk();
     b.isColliding();
+
+    if(abs(b.x == ball1.x)){
+      scoreboard = scoreboard + 0.5
+    }
+    
   });
 }
 
@@ -154,7 +155,6 @@ function isColliding() {
   colliding = false;
 }
 
-var x = 0;
 
 function menu() {
   background("white");
