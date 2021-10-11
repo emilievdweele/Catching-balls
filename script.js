@@ -4,6 +4,11 @@ var scoreboard = 0;
 var gameState = 0;
 var balk = [];
 var x = 0;
+let img
+
+function preload(){
+  flappybird = loadImage("images/firebird.png");
+}
 
 
 
@@ -18,8 +23,8 @@ class Ball {
   }
 
   drawBall() {
-    fill("white");
-    ellipse(this.x, this.y, this.w, this.h)
+    image(flappybird, this.x, this.y, this.w,this.h);
+    //ellipse(this.x, this.y, this.w, this.h)
     this.vy = this.vy + this.ay;
     this.y = this.y + this.vy;
 
@@ -69,7 +74,7 @@ class Balk {
 function setup() {
   createCanvas(800, 400);
 
-  ball1 = new Ball(150, 200, 30, 30, 2)
+  ball1 = new Ball(150, 200, 40, 30, 2)
 
   gatGrootte = 100;
 }
@@ -92,7 +97,7 @@ function draw() {
   if (gameState == 2) {
     background("red");    
     text("GAME OVER", 50, 40);
-    ball1 = new Ball(150, 200, 30, 30, 2)
+    ball1 = new Ball(150, 200, 40, 30, 2)
     balk = [];
     x = 0;
   }
@@ -129,7 +134,6 @@ function game() {
     if(abs(b.x == ball1.x)){
       scoreboard = scoreboard + 0.5
     }
-    
   });
 }
 
@@ -140,6 +144,7 @@ function keyPressed() {
 
   if (keyCode == 49) {
     gameState = 1;
+    scoreboard = 0;
   }
 
   if (keyCode == 50) {
