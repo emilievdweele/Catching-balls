@@ -8,6 +8,8 @@ let img
 
 function preload(){
   flappybird = loadImage("images/firebird.png");
+  tube = loadImage("images/Tube1.png")
+  tubeTop = loadImage("images/Tube2.png")
 }
 
 
@@ -42,17 +44,18 @@ class Ball {
 }
 
 class Balk {
-  constructor(x, y, w, h, color) {
+  constructor(x, y, w, h, img) {
     this.x = x;
     this.y = y;
     this.w = w;
     this.h = h;
-    this.c = "green";
+    this.img = img;
   }
 
   drawBalk() {
-    fill(this.c);
-    rect(this.x, this.y, this.w, this.h);
+    //fill(this.c);
+
+    image(this.img, this.x, this.y, this.w, this.h);
     this.x -= 5;
   }
 
@@ -115,8 +118,8 @@ function game() {
 
     var gatHoogte = random(0, 400 - gatGrootte);
 
-    let balk1 = new Balk(800, 0, 50, gatHoogte);
-    let balk2 = new Balk(800, gatHoogte + gatGrootte, 50, 400);
+    let balk1 = new Balk(800, 0, 50, gatHoogte,tubeTop);
+    let balk2 = new Balk(800, gatHoogte + gatGrootte, 50, 400,tube);
 
     balk.push(balk1);
     balk.push(balk2);
