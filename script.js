@@ -4,12 +4,14 @@ var scoreboard = 0;
 var gameState = 0;
 var balk = [];
 var x = 0;
-let img
+let img;
 
 function preload(){
-  flappybird = loadImage("images/firebird.png");
-  tube = loadImage("images/Tube1.png")
-  tubeTop = loadImage("images/Tube2.png")
+  flappybird = loadImage("images/pinkbird.png");
+  tube = loadImage("images/Tube1.png");
+  tubeTop = loadImage("images/Tube2.png");
+  img = loadImage("images/gamebackground.jpg");
+
 }
 
 
@@ -75,15 +77,15 @@ class Balk {
 }
 
 function setup() {
+  bg = loadImage("images/gamebackground.jpg")
   createCanvas(800, 400);
-
+  
   ball1 = new Ball(150, 200, 40, 30, 2)
 
   gatGrootte = 100;
 }
 
 function draw() {
-
   text("gameState" + gameState, 30, 30);
 
   if (gameState == 0) {
@@ -108,7 +110,7 @@ function draw() {
 
 
 function game() {
-  background(225);
+  background(bg);
 
   fill("white");
   text(scoreboard, 300, 50);
