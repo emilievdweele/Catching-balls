@@ -73,7 +73,6 @@ class Balk {
       this.c = "green";
     }
   }
-
 }
 
 function setup() {
@@ -89,19 +88,18 @@ function draw() {
   text("gameState" + gameState, 30, 30);
 
   if (gameState == 0) {
-    background("yellow");
     menu();
   }
 
   if (gameState == 1) {
-    background("blue");
     text("Start game", 30, 40)
     game();
   }
 
   if (gameState == 2) {
     background("red");    
-    text("GAME OVER", 50, 40);
+    text("GAME OVER", 345, 200);
+    fill("black");
     ball1 = new Ball(150, 200, 40, 30, 2)
     balk = [];
     x = 0;
@@ -113,7 +111,7 @@ function game() {
   background(bg);
 
   fill("white");
-  text(scoreboard, 300, 50);
+  text(scoreboard, 400, 50);
 
 
   if (frameCount % 80 == 0) {
@@ -167,7 +165,7 @@ function isColliding() {
 
 
 function menu() {
-  background("white");
+  background("pink");
   text("Menu", 30, 40);
   text("1. Start", 25, 65);
   text("2. Game over", 25, 85);
