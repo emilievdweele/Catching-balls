@@ -10,8 +10,9 @@ function preload(){
   flappybird = loadImage("images/pinkbird.png");
   tube = loadImage("images/Tube1.png");
   tubeTop = loadImage("images/Tube2.png");
-  img = loadImage("images/gamebackground.jpg");
-  flap = loadSound("sfx_wing.mp3")
+  bgimg = loadImage("images/gamebackground.jpg");
+  flap = loadSound("sfx_wing.mp3");
+  bgimg2 = loadImage("images/startbackground.jpg");
 }
 
 
@@ -79,7 +80,7 @@ class Balk {
 }
 
 function setup() {
-  bg = loadImage("images/gamebackground.jpg")
+  //bgimg = loadImage("images/gamebackground.jpg")
   createCanvas(800, 400);
   
   ball1 = new Ball(150, 200, 40, 30, 2)
@@ -92,6 +93,7 @@ function draw() {
 
   if (gameState == 0) {
     menu();
+    bg2 = loadImage("images/startbackground.jpg");
   }
 
   if (gameState == 1) {
@@ -107,7 +109,7 @@ function draw() {
     balk = [];
     x = 0;
     text("Highscore: " + getItem("highscore"), 345, 250)
-    text("Score:" + scoreboard, 370, 280)
+    text("Score: " + scoreboard, 370, 280)
     textSize(20);
     textFont('Georgia');
   }
@@ -115,7 +117,7 @@ function draw() {
 
 
 function game() {
-  background(bg);
+  background(bgimg);
 
   fill("white");
   text(scoreboard, 400, 50);
@@ -174,7 +176,7 @@ function isColliding() {
 
 
 function menu() {
-  background("pink");
+  background(bgimg2);
   text("Menu", 30, 40);
   text("1. Start", 25, 65);
   text("2. Game over", 25, 85);
