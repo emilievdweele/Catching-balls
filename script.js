@@ -13,6 +13,8 @@ function preload(){
   bgimg = loadImage("images/gamebackground.jpg");
   flap = loadSound("sfx_wing.mp3");
   bgimg2 = loadImage("images/startbackground.jpg");
+  skull = loadImage("images/doodshoofd.png");
+  bgimg3 = loadImage("images/graveyard.jpg");
 }
 
 
@@ -102,16 +104,18 @@ function draw() {
   }
 
   if (gameState == 2) {
-    background('red');
-    text("GAME OVER", 345, 200);
-    fill("black");
+    background (bgimg3);
+    image(skull, 307, 1);
+    text("GAME OVER", 306, 196, textSize(30));
+    fill("white");
     ball1 = new Ball(150, 200, 40, 30, 2)
     balk = [];
     x = 0;
-    text("Highscore: " + getItem("highscore"), 345, 250)
-    text("Score: " + scoreboard, 370, 280)
-    textSize(20);
-    textFont('Georgia');
+    text("Highscore: " + getItem("highscore"), 330, 250, textSize(25));
+    text("Score: " + scoreboard, 355, 280, textSize(25));
+    text("Press Enter To Play Again", 305, 310, textSize(15))
+    textFont("Georgia");
+    textStyle("bold");
   }
 }
 
@@ -156,7 +160,7 @@ function keyPressed() {
     flap.play();
   }
 
-  if (keyCode == 49) {
+  if (keyCode == 13) {
     gameState = 1;
     scoreboard = 0;
   }
@@ -177,11 +181,13 @@ function isColliding() {
 
 function menu() {
   background(bgimg2);
-  text("Menu", 30, 40);
-  text("1. Start", 25, 65);
-  text("2. Game over", 25, 85);
-  text("3. Terug naar menu", 25, 105);
-  fill("black");
-  textSize(15);
+  text("Press Enter To Start", 280, 200)
+  //text("Menu", 30, 40);
+  //text("1. Start", 25, 65);
+  //text("2. Game over", 25, 85);
+  //text("3. Terug naar menu", 25, 105);
+  fill("white");
+  textSize(30);
    textFont('Georgia');
+   textStyle("bold");
 }
