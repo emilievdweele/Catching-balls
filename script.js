@@ -33,8 +33,7 @@ class Ball {
     this.y = this.y + this.vy;
 
     if (this.y > 385) {
-      this.vy = 0;
-      this.ay = 0;
+      gameState = 2;
     }
     else {
       this.ay = 0.3;
@@ -101,7 +100,7 @@ function draw() {
   }
 
   if (gameState == 2) {
-    background("red");    
+    background('red');
     text("GAME OVER", 345, 200);
     fill("black");
     ball1 = new Ball(150, 200, 40, 30, 2)
@@ -109,6 +108,7 @@ function draw() {
     x = 0;
     text("Highscore: " + getItem("highscore"), 345, 250)
     textSize(20);
+    textFont('Georgia');
   }
 }
 
@@ -118,6 +118,7 @@ function game() {
 
   fill("white");
   text(scoreboard, 400, 50);
+  textSize(20);
 
 
   if (frameCount % 80 == 0) {
@@ -178,4 +179,6 @@ function menu() {
   text("2. Game over", 25, 85);
   text("3. Terug naar menu", 25, 105);
   fill("black");
+  textSize(15);
+   textFont('Georgia');
 }
