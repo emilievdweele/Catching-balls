@@ -11,10 +11,11 @@ function preload(){
   tube = loadImage("images/Tube1.png");
   tubeTop = loadImage("images/Tube2.png");
   bgimg = loadImage("images/gamebackground.jpg");
-  flap = loadSound("sfx_wing.mp3");
   bgimg2 = loadImage("images/startbackground.jpg");
-  skull = loadImage("images/doodshoofd.png");
   bgimg3 = loadImage("images/graveyard.jpg");
+  skull = loadImage("images/doodshoofd.png");
+  flap = loadSound("sounds/sfx_wing.mp3");
+  dead = loadSound("sounds/zapsplat_human_male_voice_says_game_over_001_15726.mp3")
 }
 
 
@@ -37,6 +38,7 @@ class Ball {
 
     if (this.y > 385) {
       gameState = 2;
+      dead.play();
     }
     else {
       this.ay = 0.3;
@@ -68,16 +70,16 @@ class Balk {
       ball1.x + ball1.w > this.x &&
       ball1.y < this.y + this.h &&
       ball1.y + ball1.h > this.y) {
-      this.c = "red";
+      //this.c = "red";
       gameState = 2;
+      dead.play();
       let highscore = getItem("highscore");
       if(scoreboard > highscore) {
         storeItem("highscore", scoreboard);
       }
     }
-    else {
+    //else {
       this.c = "green";
-    }
   }
 }
 
@@ -113,7 +115,7 @@ function draw() {
     x = 0;
     text("Highscore: " + getItem("highscore"), 330, 250, textSize(25));
     text("Score: " + scoreboard, 355, 280, textSize(25));
-    text("Press Enter To Play Again", 305, 310, textSize(15))
+    text("Press Enter To Play Again", 275, 310, textSize(20))
     textFont("Georgia");
     textStyle("bold");
   }
@@ -181,7 +183,7 @@ function isColliding() {
 
 function menu() {
   background(bgimg2);
-  text("Press Enter To Start", 280, 200)
+  text("Press Enter To Start", 270, 200)
   //text("Menu", 30, 40);
   //text("1. Start", 25, 65);
   //text("2. Game over", 25, 85);
