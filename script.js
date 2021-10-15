@@ -11,7 +11,7 @@ function preload(){
   tube = loadImage("images/Tube1.png");
   tubeTop = loadImage("images/Tube2.png");
   img = loadImage("images/gamebackground.jpg");
-
+  flap = loadSound("sfx_wing.mp3")
 }
 
 
@@ -68,6 +68,10 @@ class Balk {
       ball1.y + ball1.h > this.y) {
       this.c = "red";
       gameState = 2;
+      let highscore = getItem("highscore");
+      if(scoreboard > highscore) {
+        storeItem("highscore", scoreboard);
+      }
     }
     else {
       this.c = "green";
@@ -103,6 +107,8 @@ function draw() {
     ball1 = new Ball(150, 200, 40, 30, 2)
     balk = [];
     x = 0;
+    text("Highscore: " + getItem("highscore"), 345, 250)
+    textSize(20);
   }
 }
 
@@ -143,6 +149,7 @@ function game() {
 function keyPressed() {
   if (keyCode == 32) {
     ball1.vy = -5;
+    flap.play();
   }
 
   if (keyCode == 49) {
