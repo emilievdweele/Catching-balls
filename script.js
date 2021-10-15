@@ -107,6 +107,7 @@ function draw() {
     balk = [];
     x = 0;
     text("Highscore: " + getItem("highscore"), 345, 250)
+    text("Score:" + scoreboard, 370, 280)
     textSize(20);
     textFont('Georgia');
   }
